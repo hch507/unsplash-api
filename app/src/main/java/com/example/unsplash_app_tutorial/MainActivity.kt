@@ -15,17 +15,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_button_search.*
 
 class MainActivity : AppCompatActivity() {
-    private var currentSearchType: SEARCH_TYPE = SEARCH_TYPE.PHOTO
+    private var currentSearchType: SEARCH_TYPE = SEARCH_TYPE.PHOTO // 검색 타입
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.d(TAG, "MainActivity - onCreate() called")
+        Log.d(TAG, "MainActivity-onCreate() called")
 
 
-        
+        //radio group 가벼오기
         search_term_radio_group.setOnCheckedChangeListener { _, checkedId ->
 
 
@@ -55,10 +55,8 @@ class MainActivity : AppCompatActivity() {
                 frame_search_btn.visibility = View.VISIBLE
                 search_term_text_layout.helperText = " "
 
-
-
                 // 스크롤뷰를 올린다.
-
+                main_scrollView.scrollTo(0,300)
 
             } else {
                 frame_search_btn.visibility = View.INVISIBLE
