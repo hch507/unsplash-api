@@ -21,7 +21,29 @@ class RetrofitManager {
     //api호출
     fun searchPhotos(searchTerm : String?, completion :(RESPONSE_STATE, String) -> Unit){
 
-        val call = iRetrofit?.searchPhotos(searchTerm=searchTerm).let{
+        val call = iRetrofit?.searchPhotos(key = API.CLIENT_ID, searchTerm=searchTerm).let{
+            it
+        }?: return
+        //실제 요청 후 callback을 받₩
+        call.enqueue(object:retrofit2.Callback<JsonElement>{
+            //응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+
+                Log.d(TAG, "RetrofitManager-onResponse() called / response : ${response.body()}")
+                completion(RESPONSE_STATE.OKAY,response.body().toString())
+            }
+            //응답실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+
+                Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
+                completion(RESPONSE_STATE.FAIL,t.toString())
+            }
+
+        })
+    }
+    fun searchUser(searchTerm : String?, completion :(RESPONSE_STATE, String) -> Unit){
+
+        val call = iRetrofit?.searchUser(key = API.CLIENT_ID,searchTerm=searchTerm).let{
             it
         }?: return
 

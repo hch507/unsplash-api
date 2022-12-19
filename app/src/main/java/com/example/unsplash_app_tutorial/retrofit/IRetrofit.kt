@@ -11,13 +11,15 @@ interface IRetrofit {
 
     //https://unsplash.com/searchphotos/?query="searchTerm"
     @GET(API.SEARCH_PHOTOS)
-    fun searchPhotos(@Query("query") searchTerm :String?) : Call<JsonElement>
+    fun searchPhotos(@Query("client_id") key : String,
+                     @Query("query") searchTerm :String?) : Call<JsonElement>
 
 
 
     //https://unsplash.com/searchusers/?query="searchTerm "
     @GET(API.SEARCH_USERS)
-    fun searchUser(@Query("query") searchTerm :String?) :Call<JsonElement>
+    fun searchUser(@Query("client_id") key : String,
+                   @Query("query") searchTerm :String?) :Call<JsonElement>
 
 
 }

@@ -19,7 +19,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-
+        android:src="@drawable/ic_baseline_search_24"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="30dp"
         />
@@ -29,21 +29,23 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/photo_search_radio_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="사진검색"
-            android:checked="true"
             android:layout_marginEnd="20dp"
-            />
+            android:checked="true"
+            android:text="사진검색"
+            tools:ignore="TouchTargetSizeCheck" />
+
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/user_search_radio_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="사용자검색"
             android:checked="false"
-            />
+            android:text="사용자검색"
+            tools:ignore="TouchTargetSizeCheck" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout

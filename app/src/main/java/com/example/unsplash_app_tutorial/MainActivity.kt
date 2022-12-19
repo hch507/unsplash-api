@@ -74,7 +74,9 @@ class MainActivity : AppCompatActivity() {
         }
         // 버튼 클릭시
         btn_search.setOnClickListener {
+
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다. / currentSearchType : $currentSearchType")
+
 
             RetrofitManager.instance.searchPhotos(searchTerm = search_term_edit_text.toString(),completion ={
                 responseState, responseBody ->
