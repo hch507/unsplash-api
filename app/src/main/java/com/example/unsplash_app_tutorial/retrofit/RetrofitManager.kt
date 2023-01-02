@@ -1,15 +1,13 @@
 package com.example.unsplash_app_tutorial.retrofit
 
 import android.util.Log
-import com.example.unsplash_app_tutorial.Photo
+import com.example.unsplash_app_tutorial.model.Photo
 import com.example.unsplash_app_tutorial.utils.API
 import com.example.unsplash_app_tutorial.utils.Constant.TAG
 import com.example.unsplash_app_tutorial.utils.RESPONSE_STATE
 import com.google.gson.JsonElement
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.create
 import java.text.SimpleDateFormat
 
 class RetrofitManager {

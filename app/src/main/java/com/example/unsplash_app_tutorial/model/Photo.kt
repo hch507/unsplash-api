@@ -1,4 +1,4 @@
-package com.example.unsplash_app_tutorial
+package com.example.unsplash_app_tutorial.model
 
 import java.io.Serializable
 

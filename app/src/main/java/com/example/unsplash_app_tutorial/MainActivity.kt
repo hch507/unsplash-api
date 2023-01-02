@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         //radio group 가벼오기
         search_term_radio_group.setOnCheckedChangeListener { _, checkedId ->
 
-
             // switch 문
             when(checkedId) {
                 R.id.photo_search_radio_btn -> {
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다. / currentSearchType : $currentSearchType")
 
-
+            val userSearchInput =search_term_edit_text.toString()
             RetrofitManager.instance.searchPhotos(searchTerm = search_term_edit_text.toString(),completion ={
                 responseState, responseArrayList ->
                 when(responseState){
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                         val bundle = Bundle()
                         bundle.putSerializable("array_list",responseArrayList)
                         intent.putExtra("bundle_array",bundle)
-                        intent.putExtra("searchTerm",search_term_edit_text.toString())
+                        intent.putExtra("searchTerm",userSearchInput)
 
                         startActivity(intent)
 
