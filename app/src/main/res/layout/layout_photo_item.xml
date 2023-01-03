@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/photo_image"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:src="@drawable/ic_baseline_insert_photo_24"
@@ -30,11 +31,13 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_favorite_24"/>
             <TextView
+                android:id="@+id/likes_count_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="999"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/create_at_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2023년\n1월1일"

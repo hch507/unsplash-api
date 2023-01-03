@@ -77,8 +77,8 @@ class MainActivity : AppCompatActivity() {
 
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다. / currentSearchType : $currentSearchType")
 
-            val userSearchInput =search_term_edit_text.toString()
-            RetrofitManager.instance.searchPhotos(searchTerm = search_term_edit_text.toString(),completion ={
+            val userSearchInput =search_term_edit_text.text.toString()
+            RetrofitManager.instance.searchPhotos(searchTerm = userSearchInput,completion ={
                 responseState, responseArrayList ->
                 when(responseState){
                     RESPONSE_STATE.OKAY->{
