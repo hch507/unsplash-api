@@ -2,6 +2,7 @@ package com.example.unsplash_app_tutorial.retrofit
 
 import android.util.Log
 import com.example.unsplash_app_tutorial.model.Photo
+import com.example.unsplash_app_tutorial.model.User
 import com.example.unsplash_app_tutorial.utils.API
 import com.example.unsplash_app_tutorial.utils.Constant.TAG
 import com.example.unsplash_app_tutorial.utils.RESPONSE_STATE
@@ -68,29 +69,60 @@ class RetrofitManager {
 
         })
     }
-    fun searchUser(searchTerm : String?, completion :(RESPONSE_STATE, String) -> Unit){
+
+    fun searchUser(searchTerm : String?, completion :(RESPONSE_STATE, ArrayList<User>) -> Unit){
 
         val call = iRetrofit?.searchUser(key = API.CLIENT_ID,searchTerm=searchTerm).let{
             it
         }?: return
-
+        var parseDataArray = ArrayList<User>()
         call.enqueue(object:retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                when(response.code()){
-                    200->{
-                    Log.d(TAG, "RetrofitManager-onResponse() called / response : ${response.body()}")
-                            completion(RESPONSE_STATE.OKAY,response.body().toString())
-                    }
-                }
+                when (response.code()) {
+                    200 -> {
+                        Log.d(
+                            TAG,
+                            "RetrofitManager-onResponse() called / response : ${response.body()}"
+                        )
 
+                        response.body()?.let {
+                            val body = it.asJsonObject
+                            val result = body.getAsJsonArray("result")
+
+                            result.forEach { item ->
+                                val itemObject = item.asJsonObject
+                                // name 가져오기
+                                val name = itemObject.get("username").asString
+                                //instagram name 가져오기
+                                val instagramname = itemObject.get("instagram_username").asString
+                                //profile가져오기
+                                val profile =
+                                    itemObject.get("profile_image").asJsonObject.get("medium").asString
+
+                                val userItem = User(
+                                    username = name,
+                                    instagramname = instagramname,
+                                    profile = profile
+                                )
+
+                                parseDataArray.add(userItem)
+
+                            }
+                            completion(RESPONSE_STATE.OKAY, parseDataArray)
+
+                        }
+                    }
+
+                }
             }
 
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
 
                 Log.d(TAG, "RetrofitManager-onFailure() called/t:$t")
-                completion(RESPONSE_STATE.FAIL,t.toString())
+                completion(RESPONSE_STATE.FAIL,parseDataArray)
             }
 
         })
+        }
     }
-}
+

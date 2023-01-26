@@ -76,32 +76,62 @@ class MainActivity : AppCompatActivity() {
         btn_search.setOnClickListener {
 
             Log.d(TAG, "MainActivity - 검색 버튼이 클릭되었다. / currentSearchType : $currentSearchType")
+            when(currentSearchType) {
+                SEARCH_TYPE.PHOTO-> {
+                    val userSearchInput = search_term_edit_text.text.toString()
+                    RetrofitManager.instance.searchPhotos(
+                        searchTerm = userSearchInput,
+                        completion = { responseState, responseArrayList ->
+                            when (responseState) {
+                                RESPONSE_STATE.OKAY -> {
+                                    Log.d(TAG, "api 호출에 성공하였습니다 $responseArrayList")
+                                    //Arraylist 전달하기
+                                    //bundle에 넣어서 전달하기
+                                    val intent = Intent(this, photoActivity::class.java)
 
-            val userSearchInput =search_term_edit_text.text.toString()
-            RetrofitManager.instance.searchPhotos(searchTerm = userSearchInput,completion ={
-                responseState, responseArrayList ->
-                when(responseState){
-                    RESPONSE_STATE.OKAY->{
-                        Log.d(TAG, "api 호출에 성공하였습니다 $responseArrayList")
-                        //Arraylist 전달하기
-                        //bundle에 넣어서 전달하기
-                        val intent = Intent(this,photoActivity::class.java )
+                                    val bundle = Bundle()
+                                    bundle.putSerializable("array_list", responseArrayList)
+                                    intent.putExtra("bundle_array", bundle)
+                                    intent.putExtra("searchTerm", userSearchInput)
 
-                        val bundle = Bundle()
-                        bundle.putSerializable("array_list",responseArrayList)
-                        intent.putExtra("bundle_array",bundle)
-                        intent.putExtra("searchTerm",userSearchInput)
+                                    startActivity(intent)
 
-                        startActivity(intent)
-
-                    }
-                    RESPONSE_STATE.FAIL->{
-                        Toast.makeText(this,"api 호출 오류 입니다",Toast.LENGTH_SHORT).show()
-                        Log.d(TAG, "api 호충에 실패 하였습니다")
-                    }
+                                }
+                                RESPONSE_STATE.FAIL -> {
+                                    Toast.makeText(this, "api 호출 오류 입니다", Toast.LENGTH_SHORT).show()
+                                    Log.d(TAG, "api 호충에 실패 하였습니다")
+                                }
+                            }
+                        })
+                    this.handleSearchButtonUi()
                 }
-            } )
-            this.handleSearchButtonUi()
+                SEARCH_TYPE.USER->{
+                    val searchTermInput = search_term_edit_text.text.toString()
+                    RetrofitManager.instance.searchUser(searchTerm = searchTermInput,completion = {
+                        responseState, responseBody->
+                        when (responseState) {
+                            RESPONSE_STATE.OKAY -> {
+                                Log.d(TAG, "api 호출에 성공하였습니다 $responseBody")
+                                //Arraylist 전달하기
+                                //bundle에 넣어서 전달하기
+//                                val intent = Intent(this, photoActivity::class.java)
+//
+//                                val bundle = Bundle()
+//                                bundle.putSerializable("array_list", responseArrayList)
+//                                intent.putExtra("bundle_array", bundle)
+//                                intent.putExtra("searchTerm", userSearchInput)
+
+ //                               startActivity(intent)
+
+                            }
+                            RESPONSE_STATE.FAIL -> {
+                                Toast.makeText(this, "api 호출 오류 입니다", Toast.LENGTH_SHORT).show()
+                                Log.d(TAG, "api 호충에 실패 하였습니다")
+                            }
+                        }
+                    } )
+                }
+            }
         }
 
     }
