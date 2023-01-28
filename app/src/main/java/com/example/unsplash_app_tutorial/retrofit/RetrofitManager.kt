@@ -87,14 +87,20 @@ class RetrofitManager {
 
                         response.body()?.let {
                             val body = it.asJsonObject
-                            val result = body.getAsJsonArray("result")
+                            val result = body.getAsJsonArray("results")
 
                             result.forEach { item ->
                                 val itemObject = item.asJsonObject
                                 // name 가져오기
                                 val name = itemObject.get("username").asString
                                 //instagram name 가져오기
-                                val instagramname = itemObject.get("instagram_username").asString
+                                var instagramname : String?= ""
+                                if(itemObject.get("instagram_username").isJsonNull()){
+                                    instagramname="정보없음"
+                                }
+                                else {
+                                    instagramname = itemObject.get("instagram_username").asString
+                                }
                                 //profile가져오기
                                 val profile =
                                     itemObject.get("profile_image").asJsonObject.get("medium").asString

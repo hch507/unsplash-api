@@ -13,41 +13,56 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/photo_image"
+            android:id="@+id/user_image"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_insert_photo_24"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_favorite_24"/>
-            <TextView
-                android:id="@+id/likes_count_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="999"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/create_at_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2023년\n1월1일"
+            android:orientation="vertical"
             tools:ignore="MissingConstraints"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp">
+                <TextView
+                    android:id="@+id/create_at_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="name : "
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NULL"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="instaggram : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NULL"/>
+            </LinearLayout>
+     </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

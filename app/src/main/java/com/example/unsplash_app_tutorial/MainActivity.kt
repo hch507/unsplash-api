@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                         completion = { responseState, responseArrayList ->
                             when (responseState) {
                                 RESPONSE_STATE.OKAY -> {
-                                    Log.d(TAG, "api 호출에 성공하였습니다 $responseArrayList")
+                                    Log.d(TAG, "photos api 호출에 성공하였습니다 $responseArrayList")
                                     //Arraylist 전달하기
                                     //bundle에 넣어서 전달하기
                                     val intent = Intent(this, photoActivity::class.java)
@@ -105,23 +105,24 @@ class MainActivity : AppCompatActivity() {
                         })
                     this.handleSearchButtonUi()
                 }
+
                 SEARCH_TYPE.USER->{
-                    val searchTermInput = search_term_edit_text.text.toString()
-                    RetrofitManager.instance.searchUser(searchTerm = searchTermInput,completion = {
-                        responseState, responseBody->
+                    val userSearchInput = search_term_edit_text.text.toString()
+                    RetrofitManager.instance.searchUser(searchTerm = userSearchInput,completion = {
+                        responseState, responseArrayList->
                         when (responseState) {
                             RESPONSE_STATE.OKAY -> {
-                                Log.d(TAG, "api 호출에 성공하였습니다 $responseBody")
+                                Log.d(TAG, "user api 호출에 성공하였습니다 ")
                                 //Arraylist 전달하기
                                 //bundle에 넣어서 전달하기
-//                                val intent = Intent(this, photoActivity::class.java)
-//
-//                                val bundle = Bundle()
-//                                bundle.putSerializable("array_list", responseArrayList)
-//                                intent.putExtra("bundle_array", bundle)
-//                                intent.putExtra("searchTerm", userSearchInput)
+                                val intent = Intent(this, userActivity::class.java)
 
- //                               startActivity(intent)
+                                val bundle = Bundle()
+                                bundle.putSerializable("user_array_list", responseArrayList)
+                                intent.putExtra("user_bundle_array", bundle)
+                                intent.putExtra("searchTerm", userSearchInput)
+
+                                startActivity(intent)
 
                             }
                             RESPONSE_STATE.FAIL -> {
