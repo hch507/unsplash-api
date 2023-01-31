@@ -36,7 +36,7 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="5dp">
                 <TextView
-                    android:id="@+id/create_at_text"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="name : "
@@ -45,6 +45,7 @@
 
                 />
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NULL"/>
@@ -58,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="instaggram : "/>
                 <TextView
+                    android:id="@+id/instagram"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NULL"/>
